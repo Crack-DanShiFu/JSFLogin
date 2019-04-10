@@ -16,11 +16,16 @@ public class DBUtils {
 
     void init() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:mysql://47.107.173.225:3306/demo";
-            String user = "root";
-            String password = "root";
-            conn = DriverManager.getConnection(url, user, password);
+
+//            Class.forName("com.mysql.jdbc.Driver");
+//            Class.forName("org.sqlite.JDBC");
+//            String url = "jdbc:mysql://47.107.173.225:3306/demo";
+//            String user = "root";
+//            String password = "root";
+//            conn = DriverManager.getConnection(url, user, password);
+            Class.forName("org.sqlite.JDBC");
+            conn = DriverManager.getConnection("jdbc:sqlite:/Users/crack/demo");
+
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -33,7 +38,7 @@ public class DBUtils {
         try {
             stat = conn.createStatement();
             ResultSet rs = null;
-            String sql = "select * from user where name=" + "'" + name + "'";
+            String sql = "select * from user where name = " + "'" + name + "'";
             System.out.println(sql);
             rs = stat.executeQuery(sql);
             while (rs.next()) {
